@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/detailview/detail.dart';
+import 'package:flutter_action/animation/fade.dart';
 class MyGridView {
   InkWell getStructuredGridCell(BuildContext context,name, image) {
     return InkWell(
       onTap: () {
         Navigator.push( context,
-            new MaterialPageRoute(builder: (context) {
+            new FadeRoute(builder: (context) {
               return new DetailView();
             }));
       },
