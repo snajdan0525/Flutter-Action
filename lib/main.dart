@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'tabs/first.dart';
-import 'tabs/second.dart';
-import 'tabs/third.dart';
+import 'pageview/first.dart';
+import 'pageview/second.dart';
+import 'pageview/third.dart';
 import 'drawer.dart';
 void main() {
   runApp(new MaterialApp(

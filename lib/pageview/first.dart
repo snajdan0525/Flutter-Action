@@ -6,7 +6,7 @@ class FirstTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.white,
-      body: new MyGridView().build(),
+      body: new MyGridView().build(context),
     );
   }
 }
