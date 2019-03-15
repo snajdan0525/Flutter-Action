@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'tabs/first.dart';
 import 'tabs/second.dart';
 import 'tabs/third.dart';
+import 'drawer.dart';
 void main() {
   runApp(new MaterialApp(
     // Title
@@ -47,6 +48,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      drawer: new MyDrawer(), //抽屉,
       // Appbar
       appBar: new AppBar(
         // Title
