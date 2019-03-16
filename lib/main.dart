@@ -3,6 +3,8 @@ import 'pageview/first.dart';
 import 'pageview/second.dart';
 import 'pageview/third.dart';
 import 'package:flutter_action/drawer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 void main() {
   runApp(new MaterialApp(
     // Title
