@@ -5,7 +5,7 @@ class ThirdTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.white,
-      body: new PhotoGridView().build(context),
+      body: PhotoGridWidget(),
     );
   }
 }

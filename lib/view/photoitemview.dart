@@ -82,10 +82,8 @@ class _GridTitleText extends StatelessWidget {
   }
 }
 
-
-
 class GridPhotoViewer extends StatefulWidget {
-  const GridPhotoViewer({ Key key, this.photo }) : super(key: key);
+  const GridPhotoViewer({Key key, this.photo}) : super(key: key);
 
   final Photo photo;
 
@@ -93,7 +91,8 @@ class GridPhotoViewer extends StatefulWidget {
   _GridPhotoViewerState createState() => _GridPhotoViewerState();
 }
 
-class _GridPhotoViewerState extends State<GridPhotoViewer> with SingleTickerProviderStateMixin {
+class _GridPhotoViewerState extends State<GridPhotoViewer>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<Offset> _flingAnimation;
   Offset _offset = Offset.zero;
@@ -119,7 +118,8 @@ class _GridPhotoViewerState extends State<GridPhotoViewer> with SingleTickerProv
   Offset _clampOffset(Offset offset) {
     final Size size = context.size;
     final Offset minOffset = Offset(size.width, size.height) * (1.0 - _scale);
-    return Offset(offset.dx.clamp(minOffset.dx, 0.0), offset.dy.clamp(minOffset.dy, 0.0));
+    return Offset(
+        offset.dx.clamp(minOffset.dx, 0.0), offset.dy.clamp(minOffset.dy, 0.0));
   }
 
   void _handleFlingAnimation() {
@@ -147,14 +147,11 @@ class _GridPhotoViewerState extends State<GridPhotoViewer> with SingleTickerProv
 
   void _handleOnScaleEnd(ScaleEndDetails details) {
     final double magnitude = details.velocity.pixelsPerSecond.distance;
-    if (magnitude < _kMinFlingVelocity)
-      return;
+    if (magnitude < _kMinFlingVelocity) return;
     final Offset direction = details.velocity.pixelsPerSecond / magnitude;
     final double distance = (Offset.zero & context.size).shortestSide;
     _flingAnimation = _controller.drive(Tween<Offset>(
-        begin: _offset,
-        end: _clampOffset(_offset + direction * distance)
-    ));
+        begin: _offset, end: _clampOffset(_offset + direction * distance)));
     _controller
       ..value = 0.0
       ..fling(velocity: magnitude / 1000.0);
