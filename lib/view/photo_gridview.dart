@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/model/photo.dart';
 import 'package:flutter_action/view/photoitemview.dart';
+
 const String _kGalleryAssetsPackage = 'flutter_gallery_assets';
 
-class PhotoGridView {
+class PhotoGridWidget extends StatefulWidget {
+  const PhotoGridWidget({Key key}) : super(key: key);
+
+  static const String routeName = '/material/grid-list';
+
+  @override
+  PhotoGridState createState() => PhotoGridState();
+}
+
+class PhotoGridState extends State<PhotoGridWidget> {
   List<Photo> photos = <Photo>[
     Photo(
       assetName: 'places/india_chennai_flower_market.png',
@@ -79,7 +89,8 @@ class PhotoGridView {
     ),
   ];
 
-  GridView build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return new GridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 4.0,
@@ -91,6 +102,9 @@ class PhotoGridView {
         return GridDemoPhotoItem(
             photo: photo,
             onBannerTap: (Photo photo) {
+              setState(() {
+                photo.isFavorite = !photo.isFavorite;
+              });
             });
       }).toList(),
     );
