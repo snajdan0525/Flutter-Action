@@ -16,76 +16,76 @@ class PhotoGridWidget extends StatefulWidget {
 class PhotoGridState extends State<PhotoGridWidget> {
   List<Photo> photos = <Photo>[
     Photo(
-      assetName: 'places/india_chennai_flower_market.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Chennai',
-      caption: 'Flower Market',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735122710/1545878949_-888937974_12286_sProdImgNo_2.jpg/0',
+      title: '杨戬',
+      caption: '根源之目',
     ),
     Photo(
-      assetName: 'places/india_tanjore_bronze_works.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Tanjore',
-      caption: 'Bronze Works',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735122914/1546066640_-888937974_2303_sProdImgNo_2.jpg/0',
+      title: '杨戬',
+      caption: '永耀之星',
     ),
     Photo(
-      assetName: 'places/india_tanjore_market_merchant.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Tanjore',
-      caption: 'Market',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735021815/1550476460_587358052_23962_sProdImgNo_2.jpg/0',
+      title: '花木兰',
+      caption: '瑞麟志',
     ),
     Photo(
-      assetName: 'places/india_tanjore_thanjavur_temple.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Tanjore',
-      caption: 'Thanjavur Temple',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735011815/1547798130_704174346_32730_sProdImgNo_2.jpg/0',
+      title: '花木兰',
+      caption: '水晶猎龙者',
     ),
     Photo(
-      assetName: 'places/india_tanjore_thanjavur_temple_carvings.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Tanjore',
-      caption: 'Thanjavur Temple',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735012117/1548064556_587358052_24401_sProdImgNo_2.jpg/0',
+      title: '花木兰',
+      caption: '冠军飞将',
     ),
     Photo(
-      assetName: 'places/india_pondicherry_salt_farm.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Pondicherry',
-      caption: 'Salt Farm',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735011016/1547110738_-888937974_9300_sProdImgNo_2.jpg/0',
+      title: '关羽',
+      caption: '冰封战神',
     ),
     Photo(
-      assetName: 'places/india_chennai_highway.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Chennai',
-      caption: 'Scooters',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735012117/1548063533_-888937974_32215_sProdImgNo_2.jpg/0',
+      title: '吕布',
+      caption: '猎兽之王',
     ),
     Photo(
-      assetName: 'places/india_chettinad_silk_maker.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Chettinad',
-      caption: 'Silk Maker',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735011017/1547112240_-888937974_22130_sProdImgNo_2.jpg/0',
+      title: '李白',
+      caption: '凤求凰',
     ),
     Photo(
-      assetName: 'places/india_chettinad_produce.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Chettinad',
-      caption: 'Lunch Prep',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735011818/1547805942_-695593207_9824_sProdImgNo_2.jpg/0',
+      title: '貂蝉',
+      caption: '仲夏夜之梦',
     ),
     Photo(
-      assetName: 'places/india_tanjore_market_technology.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Tanjore',
-      caption: 'Market',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735011016/1547110738_-888937974_9300_sProdImgNo_2.jpg/0',
+      title: '关羽',
+      caption: '冰封战神',
     ),
     Photo(
-      assetName: 'places/india_pondicherry_beach.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Pondicherry',
-      caption: 'Beach',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735011818/1547805942_-695593207_9824_sProdImgNo_2.jpg/0',
+      title: '貂蝉',
+      caption: '仲夏夜之梦',
     ),
     Photo(
-      assetName: 'places/india_pondicherry_fisherman.png',
-      assetPackage: _kGalleryAssetsPackage,
-      title: 'Pondicherry',
-      caption: 'Fisherman',
+      photoUrl:
+          'http://shp.qpic.cn/ishow/2735011017/1547112240_-888937974_22130_sProdImgNo_2.jpg/0',
+      title: '李白',
+      caption: '凤求凰',
     ),
   ];
 
@@ -98,15 +98,13 @@ class PhotoGridState extends State<PhotoGridWidget> {
       padding: const EdgeInsets.all(4.0),
       primary: true,
       childAspectRatio: 1.0,
-      children: photos.map<Widget>((Photo photo) {
-        return GridDemoPhotoItem(
-            photo: photo,
-            onBannerTap: (Photo photo) {
-              setState(() {
-                photo.isFavorite = !photo.isFavorite;
-              });
-            });
-      }).toList(),
+      children: photos.map<Widget>((photo) => new GridDemoPhotoItem(
+              photo: photo,
+              onBannerTap: (Photo photo) {
+                setState(() {
+                  photo.isFavorite = !photo.isFavorite;
+                });
+              })).toList(),
     );
   }
 }
