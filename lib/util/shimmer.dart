@@ -44,3 +44,22 @@ class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
     super.deactivate();
   }
 }
+
+/*
+我们的View继承于SingleChildRenderObjectWidget会默认实现一个createRenderObject方法
+会返回一个RenderConstrainedBox
+这个对象就是负责对你Widget的绘制和布局。
+ */
+class _Shimmer extends SingleChildRenderObjectWidget {
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    // TODO: implement createRenderObject
+    return null;
+  }
+
+  @override
+  SingleChildRenderObjectElement createElement() {
+    // TODO: implement createElement
+    return super.createElement();
+  }
+}
