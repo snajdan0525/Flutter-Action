@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/model/photo.dart';
+import 'package:flutter_action/animation/fade.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 typedef BannerTapCallback = void Function(Photo photo);
 
@@ -13,19 +15,14 @@ class GridDemoPhotoItem extends StatelessWidget {
         super(key: key);
 
   final Photo photo;
-  final BannerTapCallback
-      onBannerTap; // User taps on the photo's header or footer.
+  final BannerTapCallback onBannerTap; // User taps on the photo's header or footer.
 
   void showPhoto(BuildContext context) {
-    Navigator.push(context,
-        MaterialPageRoute<void>(builder: (BuildContext context) {
+    Navigator.push(context, new FadeRoute(builder: (BuildContext context) {
       return Scaffold(
         appBar: AppBar(title: Text(photo.title)),
         body: SizedBox.expand(
-          child: Hero(
-            tag: photo.tag,
-            child: GridPhotoViewer(photo: photo),
-          ),
+          child: GridPhotoViewer(photo: photo),
         ),
       );
     }));
@@ -37,14 +34,10 @@ class GridDemoPhotoItem extends StatelessWidget {
         onTap: () {
           showPhoto(context);
         },
-        child: Hero(
-            key: Key(photo.assetName),
-            tag: photo.tag,
-            child: Image.asset(
-              photo.assetName,
-              package: photo.assetPackage,
-              fit: BoxFit.cover,
-            )));
+        child: CachedNetworkImage(
+          imageUrl: photo.photoUrl,
+          fit: BoxFit.cover,
+        ));
 
     final IconData icon = photo.isFavorite ? Icons.star : Icons.star_border;
     return GridTile(
@@ -168,9 +161,8 @@ class _GridPhotoViewerState extends State<GridPhotoViewer>
           transform: Matrix4.identity()
             ..translate(_offset.dx, _offset.dy)
             ..scale(_scale),
-          child: Image.asset(
-            widget.photo.assetName,
-            package: widget.photo.assetPackage,
+          child: CachedNetworkImage(
+            imageUrl: widget.photo.photoUrl,
             fit: BoxFit.cover,
           ),
         ),

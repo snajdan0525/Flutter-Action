@@ -29,7 +29,6 @@ class MyGridView {
 
   GridView build(BuildContext context ) {
     return new GridView.count(
-
       primary: true,
       padding: const EdgeInsets.all(1.0),
       crossAxisCount: 2,

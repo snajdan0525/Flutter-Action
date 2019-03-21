@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_action/detailview/CircleView.dart';
 
 class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("CustomView"),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      body: Container(child: CircleView(),),
     );
+//    return MaterialApp(
+//      title: 'Flutter Demo',
+//      theme: ThemeData(
+//        primarySwatch: Colors.blue,
+//      ),
+//      home: MyHomePage(title: 'Flutter Demo Home Page'),
+//    );
   }
 }
 
@@ -46,7 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .display1,
             ),
           ],
         ),

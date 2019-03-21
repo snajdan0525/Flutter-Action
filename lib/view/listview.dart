@@ -16,8 +16,6 @@ class ContactsList extends StatelessWidget {
   }
 
   List<ContactListItem> _buildContactsList() {
-    return _contactModal
-        .map((contact) => new ContactListItem(contact))
-        .toList();
+    return _contactModal.map((contact) => new ContactListItem(contact)).toList();
   }
 }
