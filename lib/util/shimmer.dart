@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class Shimmer extends StatefulWidget {
   @override
@@ -62,4 +63,55 @@ class _Shimmer extends SingleChildRenderObjectWidget {
     // TODO: implement createElement
     return super.createElement();
   }
+}
+
+
+enum ShimmerDirection { ltr, rtl, ttb, btt }
+
+class _ShimmerBox extends RenderProxyBox {
+  final _clearPaint = Paint();
+  final Paint _gradientPaint;
+  final Gradient _gradient;
+  final ShimmerDirection _direction;
+  double _percent;
+  Rect _rect;
+
+  _ShimmerBox(this._percent, this._direction, this._gradient)
+      : _gradientPaint = Paint()..blendMode = BlendMode.srcIn;
+
+  @override
+  bool get alwaysNeedsCompositing => child != null;
+
+
+  set percent(double newValue) {
+    if (newValue != _percent) {
+      _percent = newValue;
+      markNeedsPaint();
+    }
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    final width = child.size.width;
+    final height = child.size.height;
+    Rect rect;
+    double dx, dy;
+    dx = _offset(-width, width, _percent);
+    dy = 0.0;
+    rect = Rect.fromLTWH(offset.dx - width, offset.dy, 3 * width, height);
+    if (_rect != rect) {
+      _gradientPaint.shader = _gradient.createShader(rect);
+      _rect = rect;
+    }
+    context.canvas.saveLayer(offset & child.size, _clearPaint);
+    context.paintChild(child, offset);
+    context.canvas.translate(dx, dy);
+    context.canvas.drawRect(rect, _gradientPaint);
+    context.canvas.restore();
+  }
+
+  double _offset(double start, double end, double percent) {
+    return start + (end - start) * percent;
+  }
+
 }
