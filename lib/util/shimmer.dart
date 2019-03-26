@@ -49,6 +49,8 @@ class Shimmer extends StatefulWidget {
 }
 
 class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -57,13 +59,17 @@ class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
+    _controller = AnimationController(vsync: this, duration: widget.period)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..addStatusListener((status) {})
+      ..forward();////启动动画(正向执行)
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _controller.dispose();
     super.dispose();
   }
 
