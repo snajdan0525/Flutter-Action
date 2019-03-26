@@ -2,10 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class Shimmer extends StatefulWidget {
+  final Widget child;
+  final Duration period;
+  final ShimmerDirection direction;
+  final Gradient gradient;
+  final int loop;
+
   @override
   _ShimmerState createState() => new _ShimmerState();
 
-  Shimmer();
+  Shimmer({
+    Key key,
+    @required this.child,
+    @required this.gradient,
+    this.direction = ShimmerDirection.ltr,
+    this.period = const Duration(milliseconds: 1500),
+    this.loop = 0,
+  }) : super(key: key);
+
+  Shimmer.fromColors(
+      {Key key,
+      @required this.child,
+      @required Color baseColor,
+      @required Color highlightColor,
+      this.period = const Duration(milliseconds: 1500),
+      this.direction = ShimmerDirection.ltr,
+      this.loop = 0})
+      : gradient = LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.centerRight,
+            colors: [
+              baseColor,
+              baseColor,
+              highlightColor,
+              baseColor,
+              baseColor
+            ],
+            stops: [
+              0.0,
+              0.35,
+              0.5,
+              0.65,
+              1.0
+            ]),
+        super(key: key);
 }
 
 class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
@@ -65,7 +105,6 @@ class _Shimmer extends SingleChildRenderObjectWidget {
   }
 }
 
-
 enum ShimmerDirection { ltr, rtl, ttb, btt }
 
 class _ShimmerBox extends RenderProxyBox {
@@ -81,7 +120,6 @@ class _ShimmerBox extends RenderProxyBox {
 
   @override
   bool get alwaysNeedsCompositing => child != null;
-
 
   set percent(double newValue) {
     if (newValue != _percent) {
@@ -113,5 +151,4 @@ class _ShimmerBox extends RenderProxyBox {
   double _offset(double start, double end, double percent) {
     return start + (end - start) * percent;
   }
-
 }
