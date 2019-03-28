@@ -18,7 +18,9 @@ class PTRListViewState extends State<PTRListView> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
-
+  static final List<String> _items = <String>[
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +32,15 @@ class PTRListViewState extends State<PTRListView> {
           key: _refreshIndicatorKey,
           onRefresh: _handleRefresh,
           child: ListView.builder(
-            itemCount: 3,
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            itemCount: _items.length,
             itemBuilder: (BuildContext context, int index) {
+              final String item = _items[index];
               return ListTile(
                 isThreeLine: true,
-                leading: CircleAvatar(child: Text('Avator')),
-                title: Text(''),
-                subtitle: const Text(''),
+                leading: CircleAvatar(child: Text(item)),
+                title: Text('This is $item item '),
+                subtitle: const Text('Flutter is Google’s mobile UI framework for crafting high-quality native experiences on iOS and Android in record time. Flutter works with existing code,'),
               );
             },
           )),
