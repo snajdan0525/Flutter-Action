@@ -4,7 +4,7 @@ import 'package:flutter_action/view/pull_to_refresh_listview.dart';
 class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  PTRListView();
+    return  PTRListViewWidget();
 //    return MaterialApp(
 //      title: 'Flutter Demo',
 //      theme: ThemeData(

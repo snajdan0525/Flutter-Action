@@ -5,16 +5,16 @@ import 'dart:async';
 document url 
 https://docs.flutter.io/flutter/material/RefreshIndicator-class.html
  */
-class PTRListView extends StatefulWidget {
-  const PTRListView({Key key}) : super(key: key);
+class PTRListViewWidget extends StatefulWidget {
+  const PTRListViewWidget({Key key}) : super(key: key);
 
   static const String routeName = 'unknow';
 
   @override
-  PTRListViewState createState() => PTRListViewState();
+  PTRListViewWidgetState createState() => PTRListViewWidgetState();
 }
 
-class PTRListViewState extends State<PTRListView> {
+class PTRListViewWidgetState extends State<PTRListViewWidget> {
   bool isLoading = false; // 是否正在请求数据中
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
