@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/detailview/CircleView.dart';
-
+import 'package:flutter_action/view/pull_to_refresh_listview.dart';
 class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("CustomView"),
-      ),
-      body: Container(child: CircleView(),),
-    );
+    return  PTRListView();
 //    return MaterialApp(
 //      title: 'Flutter Demo',
 //      theme: ThemeData(
