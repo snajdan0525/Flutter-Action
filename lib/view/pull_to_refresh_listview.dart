@@ -107,7 +107,7 @@ class PTRListViewState extends State<PTRListView> {
   }
 
 /*
-  * LoadMoreData
+  * list探底，执行的具体事件
   * */
   Future _handleLoadMore() async {
     if (!isLoading ) {
