@@ -52,6 +52,13 @@ class PTRListViewWidgetState extends State<PTRListViewWidget> {
       }
     });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
