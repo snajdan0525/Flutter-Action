@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_action/view/pull_to_refresh_listview.dart';
+import 'package:flutter_action/view/pull_to_refresh_listview_without_appbar.dart';
+import 'dart:async';
 
 class SimpleDataViewWidget extends StatefulWidget {
   const SimpleDataViewWidget({Key key}) : super(key: key);
@@ -10,38 +11,51 @@ class SimpleDataViewWidget extends StatefulWidget {
 
 class SimpleDataViewState extends State<SimpleDataViewWidget>
     with TickerProviderStateMixin {
-  AnimationController animationController;
+  AnimationController _animationController;
+  StreamController _postsController;
 
   @override
   void initState() {
     super.initState();
-    animationController = new AnimationController(
+    _postsController = new StreamController();
+    loadPosts();
+    _animationController = new AnimationController(
         vsync: this, duration: new Duration(milliseconds: 350));
-
   }
 
-  bool isLoading = false;
+  loadPosts() async {
+    fetchPost().then((res) async {
+      _postsController.add(res);
+      return res;
+    });
+  }
+
+  Future fetchPost([howMany = 5]) async {
+    return Future.delayed(Duration(seconds: 2), () {
+      return 'Data has loaded';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('SimpleDataViewWidget'),
       ),
-      body: new Stack(
-        children: <Widget>[
-          new Opacity(
-            opacity: isLoading ? 1 : 0,
-            child: PTRListViewWidget(),
-          ),
-          new Opacity(
-            opacity: isLoading ? 0 : 1,
-            child: _getProgress(),
-          )
-        ],
-      ),
+      body: StreamBuilder(
+          stream: _postsController.stream,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return PTRListViewWidget();
+            }
+            if (snapshot.connectionState != ConnectionState.done) {
+              return _getProgress();
+            }
+            if (!snapshot.hasData &&
+                snapshot.connectionState == ConnectionState.done) {
+              return Text('No Data');
+            }
+          }),
     );
   }
 
@@ -56,6 +70,6 @@ class SimpleDataViewState extends State<SimpleDataViewWidget>
   @override
   void dispose() {
     super.dispose();
-    animationController.dispose();
+    _animationController.dispose();
   }
 }
