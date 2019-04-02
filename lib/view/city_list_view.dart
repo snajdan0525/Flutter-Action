@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_action/view/pull_to_refresh_listview_without_appbar.dart';
 import 'dart:async';
 import 'package:flutter_action/model/city.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:lpinyin/lpinyin.dart';
 
 class ChinaCityListViewWidget extends StatefulWidget {
   const ChinaCityListViewWidget({Key key}) : super(key: key);
@@ -42,10 +42,27 @@ class ChinaCityListViewState extends State<ChinaCityListViewWidget>
       list.forEach((value) {
         _cityList.add(CityInfo(name: value['name']));
       });
+      _sortCityList(_cityList);
     });
+
     return Future.delayed(Duration(milliseconds: 1500), () {
       return _cityList;
     });
+  }
+
+  void _sortCityList(List<CityInfo> list) {
+    if (list == null || list.isEmpty) return;
+    for (int i = 0, length = list.length; i < length; i++) {
+      String pinyin = PinyinHelper.getPinyinE(list[i].name);
+      String tag = pinyin.substring(0, 1).toUpperCase();
+      list[i].namePinyin = pinyin;
+      if (RegExp("[A-Z]").hasMatch(tag)) {
+        list[i].tagIndex = tag;
+      } else {
+        list[i].tagIndex = "#";
+      }
+    }
+    _cityList.sort((a, b) => a.tagIndex.compareTo(b.tagIndex));
   }
 
   @override
