@@ -27,6 +27,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   flutter_gallery_assets: 0.1.6
+  lpinyin: ^1.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -43,6 +44,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - data_repo/city/china.json
     - data_repo/img/ic_launcher.png
     - data_repo/img/social/facebook.png
     - data_repo/img/social/instagram.png
