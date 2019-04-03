@@ -135,7 +135,6 @@ class ChinaCityListViewState extends State<ChinaCityListViewWidget>
   }
 
   Widget _buildStickSectionWidget(String stickSectionTag) {
-    stickSectionTag = (stickSectionTag == "#" ? "热门城市" : stickSectionTag);
     return Container(
       height: _stickSectionHeight.toDouble(),
       //40
