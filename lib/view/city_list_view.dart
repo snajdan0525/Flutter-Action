@@ -21,7 +21,7 @@ class ChinaCityListViewState extends State<ChinaCityListViewWidget>
   int _stickSectionHeight = 40;
   int _itemHeight = 50;
 
-  String sectionTag = '';
+  String sectionTag = 'A';
 
   @override
   void initState() {
@@ -107,6 +107,7 @@ class ChinaCityListViewState extends State<ChinaCityListViewWidget>
                 stickSectionHeight: _stickSectionHeight,
                 itemHeight: _itemHeight,
                 itemBuilder: (context, data) => _buildListItemWidget(data),
+                onStickSectionTagChanged: _onStickSectionTagChanged,
               );
             }
             if (snapshot.connectionState != ConnectionState.done) {
@@ -168,5 +169,11 @@ class ChinaCityListViewState extends State<ChinaCityListViewWidget>
         )
       ],
     );
+  }
+
+  void _onStickSectionTagChanged(String tag) {
+    setState(() {
+      sectionTag = tag;
+    });
   }
 }
