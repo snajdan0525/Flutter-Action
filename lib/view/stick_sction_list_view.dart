@@ -10,6 +10,9 @@ class StickSectionListViewWidget extends StatefulWidget {
   final List<CityInfo> data;
   final ItemWidgetBuilder itemBuilder;
 
+  ///on section tag changed callback.
+  final ValueChanged<String> onStickSectionTagChanged;
+
   StickSectionListViewWidget({
     Key key,
     this.data,
@@ -17,6 +20,7 @@ class StickSectionListViewWidget extends StatefulWidget {
     this.itemHeight: 50,
     this.stickSectionHeight: 40,
     @required this.itemBuilder,
+    this.onStickSectionTagChanged,
   }) : super(key: key);
 
   @override
@@ -38,10 +42,13 @@ class StickSectionListViewState extends State<StickSectionListViewWidget> {
       ..addListener(() {
         int offset = _scrollController.offset.toInt();
         int _index = _getIndex(offset);
+        print('_index $_index');
         if (_index != -1 && _lastIndex != _index) {
+          print('_index $_index');
           _lastIndex = _index;
-          if (widget.onSusTagChanged != null) {
-            widget.onSusTagChanged(_suspensionSectionMap.keys.toList()[_index]);
+          if (widget.onStickSectionTagChanged != null) {
+            widget.onStickSectionTagChanged(
+                _stickSectionOffsetMap.keys.toList()[_index]);
           }
         }
       });
@@ -70,7 +77,7 @@ class StickSectionListViewState extends State<StickSectionListViewWidget> {
     for (int i = 0; i < length - 1; i++) {
       int space = _stickSectionOffsetList[i + 1] - offset;
       if (space > 0 && space < widget.stickSectionHeight) {
-        space = space - widget.itemHeight;
+        space = space - widget.stickSectionHeight;
       } else {
         space = 0;
       }
@@ -95,6 +102,7 @@ class StickSectionListViewState extends State<StickSectionListViewWidget> {
   Widget build(BuildContext context) {
     var children = <Widget>[
       ListView.builder(
+          controller: _scrollController,
           itemCount: widget.data.length,
           itemBuilder: (BuildContext context, int index) {
             return widget.itemBuilder(context, widget.data[index]);
