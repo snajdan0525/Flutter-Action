@@ -24,10 +24,15 @@ class StickSectionListViewWidget extends StatefulWidget {
 }
 
 class StickSectionListViewState extends State<StickSectionListViewWidget> {
+  ScrollController _scrollController;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _scrollController = new ScrollController()..addListener(() {
+      // TODO: implement callback
+      
+    });
   }
 
   @override
@@ -41,7 +46,7 @@ class StickSectionListViewState extends State<StickSectionListViewWidget> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
+    _scrollController.dispose();
   }
 }
