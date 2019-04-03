@@ -1,11 +1,11 @@
 class CityInfo {
   String name;
-  String tagIndex;
+  String alphaTag;
   String namePinyin;
 
   CityInfo({
     this.name,
-    this.tagIndex,
+    this.alphaTag,
     this.namePinyin,
   });
 
