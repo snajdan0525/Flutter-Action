@@ -57,12 +57,12 @@ class ChinaCityListViewState extends State<ChinaCityListViewWidget>
       String tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;
       if (RegExp("[A-Z]").hasMatch(tag)) {
-        list[i].tagIndex = tag;
+        list[i].alphaTag = tag;
       } else {
-        list[i].tagIndex = "#";
+        list[i].alphaTag = "#";
       }
     }
-    _cityList.sort((a, b) => a.tagIndex.compareTo(b.tagIndex));
+    _cityList.sort((a, b) => a.alphaTag.compareTo(b.alphaTag));
   }
 
   @override
