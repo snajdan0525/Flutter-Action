@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/model/city.dart';
 
+typedef Widget ItemWidgetBuilder(BuildContext context, CityInfo data);
+
 class StickSectionListViewWidget extends StatefulWidget {
   final int stickSectionHeight;
   final Widget stickSectionWidget;
   final int itemHeight;
   final List<CityInfo> data;
-  final AsyncWidgetBuilder itemBuilder;
+  final ItemWidgetBuilder itemBuilder;
 
   StickSectionListViewWidget({
     Key key,
@@ -18,7 +20,7 @@ class StickSectionListViewWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State createState() {}
+  StickSectionListViewState createState() => StickSectionListViewState();
 }
 
 class StickSectionListViewState extends State<StickSectionListViewWidget> {
@@ -30,8 +32,11 @@ class StickSectionListViewState extends State<StickSectionListViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return ListView.builder(
+        itemCount: widget.data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return widget.itemBuilder(context, widget.data[index]);
+        });
   }
 
   @override
