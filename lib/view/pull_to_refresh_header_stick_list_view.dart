@@ -6,7 +6,14 @@ document url
 https://docs.flutter.io/flutter/material/RefreshIndicator-class.html
  */
 class PTRHeaderListViewWidget extends StatefulWidget {
-  const PTRHeaderListViewWidget({Key key}) : super(key: key);
+  final List<Widget> children;
+  final int stickHeaderPos;
+
+  const PTRHeaderListViewWidget({
+    Key key,
+    this.children = const <Widget>[],
+    this.stickHeaderPos = 0,
+  }) : super(key: key);
 
   static const String routeName = 'unknow';
 
@@ -37,11 +44,14 @@ class PTRHeaderListViewWidgetState extends State<PTRHeaderListViewWidget> {
   ];
 
   ScrollController _scrollController = new ScrollController();
-
+  int _headerCount;
+  Widget _stickWidget;
+  int _stickWidgetHeight;
   @override
   void initState() {
     super.initState();
     items.addAll(_items);
+    _init();
     _scrollController.addListener(() {
       // 如果下拉的当前位置到scroll的最下面
       if (_scrollController.position.pixels ==
@@ -51,6 +61,12 @@ class PTRHeaderListViewWidgetState extends State<PTRHeaderListViewWidget> {
     });
   }
 
+
+  void _init(){
+    _headerCount = widget.children.length;
+    _stickWidget = widget.children[widget.stickHeaderPos];
+//    _stickWidgetHeight = _stickWidget
+  }
   @override
   void dispose() {
     super.dispose();
@@ -74,19 +90,23 @@ class PTRHeaderListViewWidgetState extends State<PTRHeaderListViewWidget> {
               if (index == items.length) {
                 return _buildLoadMoreProgressIndicator();
               }
-              if (index == 0) {
-                return Image(
-                    image:
-                        new AssetImage('data_repo/img/banner/header_img.png'));
-              }
-              if (index == 1) {
-                return Container(
-                  alignment: Alignment.centerLeft,
-                  color: Color(0xfff3f4f5),
-                  padding: const EdgeInsets.only(left: 15.0),
-                  height: 50.0,
-                  child: Text("Stick fixed header view"),
-                );
+//              if (index == 0) {
+//                return Image(
+//                    image:
+//                        new AssetImage('data_repo/img/banner/header_img.png'));
+//              }
+//              if (index == 1) {
+//                return Container(
+//                  alignment: Alignment.centerLeft,
+//                  color: Color(0xfff3f4f5),
+//                  padding: const EdgeInsets.only(left: 15.0),
+//                  height: 50.0,
+//                  child: Text("Stick fixed header view"),
+//                );
+//              }
+
+              if (index <= _headerCount - 1) {
+                return widget.children[index];
               }
               final String item = items[index];
               return ListTile(
