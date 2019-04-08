@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
+import 'package:flutter_action/view/photo_gridview.dart';
 /*
 document url 
 https://docs.flutter.io/flutter/material/RefreshIndicator-class.html
@@ -8,11 +8,13 @@ https://docs.flutter.io/flutter/material/RefreshIndicator-class.html
 class PTRHeaderListViewWidget extends StatefulWidget {
   final List<Widget> children;
   final int stickHeaderPos;
+  final Widget stickWidget;
 
   const PTRHeaderListViewWidget({
     Key key,
     this.children = const <Widget>[],
     this.stickHeaderPos = 0,
+    this.stickWidget,
   }) : super(key: key);
 
   static const String routeName = 'unknow';
@@ -23,6 +25,7 @@ class PTRHeaderListViewWidget extends StatefulWidget {
 
 class PTRHeaderListViewWidgetState extends State<PTRHeaderListViewWidget> {
   bool isLoading = false; // 是否正在请求数据中
+  bool _visable = false;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
   List items = new List();
@@ -46,27 +49,57 @@ class PTRHeaderListViewWidgetState extends State<PTRHeaderListViewWidget> {
   ScrollController _scrollController = new ScrollController();
   int _headerCount;
   Widget _stickWidget;
-  int _stickWidgetHeight;
+  double _stickWidgetHeight;
+
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
     super.initState();
     items.addAll(_items);
     _init();
     _scrollController.addListener(() {
-      // 如果下拉的当前位置到scroll的最下面
+      _handleStick(_scrollController.offset);
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
+        // 如果下拉的当前位置到scroll的最下面
         _handleLoadMore();
       }
     });
   }
 
+  double _stickOffset = 0.0;
 
-  void _init(){
-    _headerCount = widget.children.length;
-    _stickWidget = widget.children[widget.stickHeaderPos];
-//    _stickWidgetHeight = _stickWidget
+  _handleStick(double offset) {
+    if (offset >= _stickOffset)
+      setState(() {
+        _visable = true;
+      });
+    else {
+      setState(() {
+        _visable = false;
+      });
+    }
   }
+
+  _afterLayout(_) {
+    for (int i = 0; i < widget.stickHeaderPos; i++) {
+      GlobalKey headerKey = widget.children[i].key;
+      _stickOffset = _stickOffset +
+          headerKey.currentContext.findRenderObject().paintBounds.size.height;
+      print('_stickOffset $_stickOffset');
+    }
+
+    GlobalKey stickKey = widget.children[widget.stickHeaderPos].key;
+    _stickWidgetHeight =
+        stickKey.currentContext.findRenderObject().paintBounds.size.height;
+    print('_stickWidgetHeight $_stickWidgetHeight');
+  }
+
+  void _init() {
+    _headerCount = widget.children.length;
+    _stickWidget = widget.stickWidget;
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -75,36 +108,20 @@ class PTRHeaderListViewWidgetState extends State<PTRHeaderListViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('PTRHeadListView'),
-      ),
-      body: RefreshIndicator(
+    var children = <Widget>[
+      RefreshIndicator(
           color: Colors.blue,
           key: _refreshIndicatorKey,
           onRefresh: _handleRefresh,
           child: ListView.builder(
             controller: _scrollController,
+            cacheExtent: 10.0,
             itemCount: items.length + 1,
             itemBuilder: (BuildContext context, int index) {
+              print('index $index');
               if (index == items.length) {
                 return _buildLoadMoreProgressIndicator();
               }
-//              if (index == 0) {
-//                return Image(
-//                    image:
-//                        new AssetImage('data_repo/img/banner/header_img.png'));
-//              }
-//              if (index == 1) {
-//                return Container(
-//                  alignment: Alignment.centerLeft,
-//                  color: Color(0xfff3f4f5),
-//                  padding: const EdgeInsets.only(left: 15.0),
-//                  height: 50.0,
-//                  child: Text("Stick fixed header view"),
-//                );
-//              }
-
               if (index <= _headerCount - 1) {
                 return widget.children[index];
               }
@@ -118,6 +135,23 @@ class PTRHeaderListViewWidgetState extends State<PTRHeaderListViewWidget> {
               );
             },
           )),
+    ];
+    if (widget.stickWidget != null) {
+      children.add(Positioned(
+        top: 0.0,
+        left: 0.0,
+        right: 0.0,
+        child: Opacity(
+          opacity: _visable ? 1.0 : 0.0,
+          child: widget.stickWidget,
+        ),
+      ));
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('PTRHeadListView'),
+      ),
+      body: Stack(children: children),
     );
   }
 
