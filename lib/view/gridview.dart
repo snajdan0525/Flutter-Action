@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/detailview/detail.dart';
 import 'package:flutter_action/animation/fade.dart';
+import 'package:flutter_action/demo/image_resolve_demo.dart';
 class MyGridView {
   InkWell getStructuredGridCell(BuildContext context,name, image) {
     return InkWell(
       onTap: () {
         Navigator.push( context,
             new FadeRoute(builder: (context) {
-              return new DetailView();
+              return new ImageResolveDemo();
             }));
       },
       child:new Card(
