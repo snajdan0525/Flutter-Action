@@ -5,6 +5,9 @@ import 'package:flutter_action/demo/pull_to_refresh_header_list_view_demo.dart';
 import 'package:flutter_action/demo/section_stick_list_view_demo.dart';
 import 'package:flutter_action/demo/pull_to_refresh_list_view_demo.dart';
 import 'package:flutter_action/demo/simple_data_view_demo.dart';
+import 'package:flutter_action/demo/bottom_sheet_demo.dart';
+import 'package:flutter_action/util/divider_line.dart';
+import 'package:flutter_action/demo/setting_item_view_widget_demo.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -26,16 +29,17 @@ class MyDrawer extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: ClipOval(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 16.0),
+                    child: ClipRect(
                       child: Image.asset(
-                        "data_repo/img/ic_launcher.png",
+                        "data_repo/img/logo.png",
                         width: 80,
                       ),
                     ),
                   ),
                   Text(
-                    "sNajdan",
+                    "FlutterAction_Demo",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],
@@ -53,6 +57,7 @@ class MyDrawer extends StatelessWidget {
                       }));
                     },
                   ),
+                  DividerLineWidget(),
                   ListTile(
                     leading: const Icon(Icons.bookmark),
                     title: const Text('PTRHeadListViewDemo'),
@@ -62,6 +67,7 @@ class MyDrawer extends StatelessWidget {
                       }));
                     },
                   ),
+                  DividerLineWidget(),
                   ListTile(
                     leading: const Icon(Icons.bookmark),
                     title: const Text('StickSectionListViewDemo'),
@@ -71,6 +77,7 @@ class MyDrawer extends StatelessWidget {
                       }));
                     },
                   ),
+                  DividerLineWidget(),
                   ListTile(
                     leading: const Icon(Icons.bookmark),
                     title: const Text('PTRListViewDemo'),
@@ -80,6 +87,7 @@ class MyDrawer extends StatelessWidget {
                       }));
                     },
                   ),
+                  DividerLineWidget(),
                   ListTile(
                     leading: const Icon(Icons.bookmark),
                     title: const Text('SimpleDataViewDemo'),
@@ -89,6 +97,27 @@ class MyDrawer extends StatelessWidget {
                       }));
                     },
                   ),
+                  DividerLineWidget(),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('BottomViewWidgetDemo'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        return new BottomSheetDemo();
+                      }));
+                    },
+                  ),
+                  DividerLineWidget(),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('SettingItemViewWidgetDemo'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        return new SettingItemViewDemo();
+                      }));
+                    },
+                  ),
+                  DividerLineWidget(),
                 ],
               ),
             ),

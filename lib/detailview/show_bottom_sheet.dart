@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_action/magic_change/magic_change_bottom_sheet.dart';
+import 'package:flutter_action/util/divider_line.dart';
+
 class BottomViewWidget extends StatefulWidget {
   const BottomViewWidget({Key key}) : super(key: key);
 
@@ -8,6 +11,22 @@ class BottomViewWidget extends StatefulWidget {
 
 class BottomViewState extends State<BottomViewWidget> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  static final List _items = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N'
+  ];
 
   @override
   void initState() {
@@ -36,6 +55,10 @@ class BottomViewState extends State<BottomViewWidget> {
               new RaisedButton(
                 onPressed: () => _showPersistentBottomSheet(context),
                 child: new Text('SHOW Persistent BOTTOM SHEET'),
+              ),
+              new RaisedButton(
+                onPressed: () => _modalMagicBottomSheetMenu(context),
+                child: new Text('SHOW Magic MODAL BOTTOM SHEET'),
               ),
             ]),
       ),
@@ -76,6 +99,62 @@ class BottomViewState extends State<BottomViewWidget> {
                   child: new Text("This is a modal sheet"),
                 )),
           );
+        });
+  }
+
+  _modalMagicBottomSheetMenu(BuildContext context) {
+    showMagicChangeModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return new Container(
+            height: 250.0,
+            color: Colors.white, //could change thi s to Color(0xFF737373),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              verticalDirection: VerticalDirection.down,
+              children: <Widget>[
+                new Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: new Center(
+                    child: new Text(
+                      'BottomView Title',
+                      style:
+                          TextStyle(color: Color(0xFF444444), fontSize: 16.0),
+                    ),
+                  ),
+                ),
+                new DividerLineWidget(),
+                new Expanded(
+                    child: ListView.builder(
+                  itemCount: _items.length,
+                  itemExtent: 50.0,
+                  itemBuilder: (BuildContext context, int index) {
+                    final String item = _items[index];
+                    return ListTile(
+                      title: new Center(
+                        child: Text(
+                          'This is $item item ',
+                          style: TextStyle(
+                              color: Color(0xFF444444), fontSize: 14.0),
+                        ),
+                      ),
+                    );
+                  },
+                ))
+              ],
+            ),
+          );
+//            new Container(
+//                decoration: new BoxDecoration(
+//                    color: Colors.white,
+//                    borderRadius: new BorderRadius.only(
+//                        topLeft: const Radius.circular(10.0),
+//                        topRight: const Radius.circular(10.0))),
+//                child: new Center(
+//                  child: new Text("This is a modal sheet"),
+//                )),
+//          );
         });
   }
 }

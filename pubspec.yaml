@@ -46,6 +46,8 @@ flutter:
   assets:
     - data_repo/city/china.json
     - data_repo/img/ic_launcher.png
+    - data_repo/img/logo.png
+    - data_repo/img/ic_arrow_right.png
     - data_repo/img/social/facebook.png
     - data_repo/img/social/instagram.png
     - data_repo/img/social/google_plus.png
