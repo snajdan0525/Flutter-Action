@@ -8,30 +8,30 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
-/// Defines the title font used for [ListTile] descendants of a [ListTileTheme].
+/// Defines the title font used for [MagicListTile] descendants of a [ListTileTheme].
 ///
 /// List tiles that appear in a [Drawer] use the theme's [TextTheme.body2]
 /// text style, which is a little smaller than the theme's [TextTheme.subhead]
 /// text style, which is used by default.
 enum ListTileStyle {
-  /// Use a title font that's appropriate for a [ListTile] in a list.
+  /// Use a title font that's appropriate for a [MagicListTile] in a list.
   list,
 
-  /// Use a title font that's appropriate for a [ListTile] that appears in a [Drawer].
+  /// Use a title font that's appropriate for a [MagicListTile] that appears in a [Drawer].
   drawer,
 }
 
-/// An inherited widget that defines color and style parameters for [ListTile]s
+/// An inherited widget that defines color and style parameters for [MagicListTile]s
 /// in this widget's subtree.
 ///
-/// Values specified here are used for [ListTile] properties that are not given
+/// Values specified here are used for [MagicListTile] properties that are not given
 /// an explicit non-null value.
 ///
 /// The [Drawer] widget specifies a tile theme for its children which sets
 /// [style] to [ListTileStyle.drawer].
 class ListTileTheme extends InheritedWidget {
   /// Creates a list tile theme that controls the color and style parameters for
-  /// [ListTile]s.
+  /// [MagicListTile]s.
   const ListTileTheme({
     Key key,
     this.dense = false,
@@ -44,7 +44,7 @@ class ListTileTheme extends InheritedWidget {
   }) : super(key: key, child: child);
 
   /// Creates a list tile theme that controls the color and style parameters for
-  /// [ListTile]s, and merges in the current list tile theme, if any.
+  /// [MagicListTile]s, and merges in the current list tile theme, if any.
   ///
   /// The [child] argument must not be null.
   static Widget merge({
@@ -75,24 +75,24 @@ class ListTileTheme extends InheritedWidget {
     );
   }
 
-  /// If true then [ListTile]s will have the vertically dense layout.
+  /// If true then [MagicListTile]s will have the vertically dense layout.
   final bool dense;
 
-  /// If specified, [style] defines the font used for [ListTile] titles.
+  /// If specified, [style] defines the font used for [MagicListTile] titles.
   final ListTileStyle style;
 
-  /// If specified, the color used for icons and text when a [ListTile] is selected.
+  /// If specified, the color used for icons and text when a [MagicListTile] is selected.
   final Color selectedColor;
 
-  /// If specified, the icon color used for enabled [ListTile]s that are not selected.
+  /// If specified, the icon color used for enabled [MagicListTile]s that are not selected.
   final Color iconColor;
 
-  /// If specified, the text color used for enabled [ListTile]s that are not selected.
+  /// If specified, the text color used for enabled [MagicListTile]s that are not selected.
   final Color textColor;
 
   /// The tile's internal padding.
   ///
-  /// Insets a [ListTile]'s contents: its [leading], [title], [subtitle],
+  /// Insets a [MagicListTile]'s contents: its [leading], [title], [subtitle],
   /// and [trailing] widgets.
   final EdgeInsetsGeometry contentPadding;
 
@@ -120,13 +120,13 @@ class ListTileTheme extends InheritedWidget {
   }
 }
 
-/// Where to place the control in widgets that use [ListTile] to position a
+/// Where to place the control in widgets that use [MagicListTile] to position a
 /// control next to a label.
 ///
 /// See also:
 ///
-///  * [CheckboxListTile], which combines a [ListTile] with a [Checkbox].
-///  * [RadioListTile], which combines a [ListTile] with a [Radio] button.
+///  * [CheckboxListTile], which combines a [MagicListTile] with a [Checkbox].
+///  * [RadioListTile], which combines a [MagicListTile] with a [Radio] button.
 enum ListTileControlAffinity {
   /// Position the control on the leading edge, and the secondary widget, if
   /// any, on the trailing edge.
@@ -195,24 +195,24 @@ enum ListTileControlAffinity {
 ///
 /// See also:
 ///
-///  * [ListTileTheme], which defines visual properties for [ListTile]s.
-///  * [ListView], which can display an arbitrary number of [ListTile]s
+///  * [ListTileTheme], which defines visual properties for [MagicListTile]s.
+///  * [ListView], which can display an arbitrary number of [MagicListTile]s
 ///    in a scrolling list.
 ///  * [CircleAvatar], which shows an icon representing a person and is often
 ///    used as the [leading] element of a ListTile.
-///  * [Card], which can be used with [Column] to show a few [ListTile]s.
-///  * [Divider], which can be used to separate [ListTile]s.
-///  * [ListTile.divideTiles], a utility for inserting [Divider]s in between [ListTile]s.
+///  * [Card], which can be used with [Column] to show a few [MagicListTile]s.
+///  * [Divider], which can be used to separate [MagicListTile]s.
+///  * [MagicListTile.divideTiles], a utility for inserting [Divider]s in between [MagicListTile]s.
 ///  * [CheckboxListTile], [RadioListTile], and [SwitchListTile], widgets
 ///    that combine [ListTile] with other controls.
 ///  * <https://material.io/design/components/lists.html>
-class ListTile extends StatelessWidget {
+class MagicListTile extends StatelessWidget {
   /// Creates a list tile.
   ///
   /// If [isThreeLine] is true, then [subtitle] must not be null.
   ///
   /// Requires one of its ancestors to be a [Material] widget.
-  const ListTile({
+  const MagicListTile({
     Key key,
     this.leading,
     this.title,
@@ -282,7 +282,7 @@ class ListTile extends StatelessWidget {
 
   /// The tile's internal padding.
   ///
-  /// Insets a [ListTile]'s contents: its [leading], [title], [subtitle],
+  /// Insets a [MagicListTile]'s contents: its [leading], [title], [subtitle],
   /// and [trailing] widgets.
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
