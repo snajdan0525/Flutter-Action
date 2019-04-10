@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_action/detailview/magic_change_bottom_sheet.dart';
+import 'package:flutter_action/magic_change/magic_change_bottom_sheet.dart';
 import 'package:flutter_action/util/divider_line.dart';
 
 class BottomViewWidget extends StatefulWidget {
