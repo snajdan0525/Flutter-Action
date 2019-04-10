@@ -14,43 +14,12 @@ const Duration _kBottomSheetDuration = Duration(milliseconds: 200);
 const double _kMinFlingVelocity = 700.0;
 const double _kCloseProgressThreshold = 0.5;
 
-/// A material design bottom sheet.
-///
-/// There are two kinds of bottom sheets in material design:
-///
-///  * _Persistent_. A persistent bottom sheet shows information that
-///    supplements the primary content of the app. A persistent bottom sheet
-///    remains visible even when the user interacts with other parts of the app.
-///    Persistent bottom sheets can be created and displayed with the
-///    [ScaffoldState.showBottomSheet] function or by specifying the
-///    [Scaffold.bottomSheet] constructor parameter.
-///
-///  * _Modal_. A modal bottom sheet is an alternative to a menu or a dialog and
-///    prevents the user from interacting with the rest of the app. Modal bottom
-///    sheets can be created and displayed with the [showModalBottomSheet]
-///    function.
-///
-/// The [BottomSheet] widget itself is rarely used directly. Instead, prefer to
-/// create a persistent bottom sheet with [ScaffoldState.showBottomSheet] or
-/// [Scaffold.bottomSheet], and a modal bottom sheet with [showModalBottomSheet].
-///
-/// See also:
-///
-///  * [showBottomSheet] and [ScaffoldState.showBottomSheet], for showing
-///    non-modal "persistent" bottom sheets.
-///  * [showModalBottomSheet], which can be used to display a modal bottom
-///    sheet.
-///  * <https://material.io/design/components/sheets-bottom.html>
 class BottomSheet extends StatefulWidget {
   /// Creates a bottom sheet.
-  ///
-  /// Typically, bottom sheets are created implicitly by
-  /// [ScaffoldState.showBottomSheet], for persistent bottom sheets, or by
-  /// [showModalBottomSheet], for modal bottom sheets.
   const BottomSheet({
     Key key,
     this.animationController,
-    this.enableDrag = true,
+    this.enableDrag = false,
     this.elevation = 0.0,
     @required this.onClosing,
     @required this.builder

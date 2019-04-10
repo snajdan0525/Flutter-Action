@@ -5,7 +5,7 @@ import 'package:flutter_action/demo/pull_to_refresh_header_list_view_demo.dart';
 import 'package:flutter_action/demo/section_stick_list_view_demo.dart';
 import 'package:flutter_action/demo/pull_to_refresh_list_view_demo.dart';
 import 'package:flutter_action/demo/simple_data_view_demo.dart';
-
+import 'package:flutter_action/demo/bottom_sheet_demo.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
     Key key,
@@ -26,16 +26,16 @@ class MyDrawer extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: ClipOval(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16.0),
+                    child: ClipRect(
                       child: Image.asset(
-                        "data_repo/img/ic_launcher.png",
+                        "data_repo/img/logo.png",
                         width: 80,
                       ),
                     ),
                   ),
                   Text(
-                    "sNajdan",
+                    "FlutterAction_Demo",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],
@@ -86,6 +86,15 @@ class MyDrawer extends StatelessWidget {
                     onTap: () {
                       Navigator.push(context, new FadeRoute(builder: (context) {
                         return new SimpleDataViewDemo();
+                      }));
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('BottomViewWidget'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        return new BottomSheetDemo();
                       }));
                     },
                   ),
