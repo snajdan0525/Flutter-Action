@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_action/magic_change/magic_change_list_tile.dart';
 
 class SettingItemViewWidget extends StatefulWidget {
   final String value;
@@ -17,10 +18,16 @@ class SettingItemViewState extends State<SettingItemViewWidget> {
     return new Center(
       child: new Container(
           color: Colors.white,
-          child: new ListTile(
+          child: new MagicListTile(
+            contentPadding: EdgeInsets.only(top: 0.0, left: 16.0, right: 8.0, bottom: 0.0),
+            title: new Text(
+              'Value',
+              textAlign: TextAlign.right,
+              style: TextStyle(color: const Color(0xFF999999), fontSize: 13.0),
+            ),
             leading: new Text(
               'Title',
-              style: TextStyle(color: const Color(0xFF444444), fontSize: 15.0),
+              style: TextStyle(color: const Color(0xFF333333), fontSize: 15.0),
             ),
             trailing: Icon(Icons.keyboard_arrow_right),
           )),

@@ -690,7 +690,7 @@ class _RenderListTile extends RenderBox {
   static const double _minLeadingWidth = 40.0;
 
   // The horizontal gap between the titles and the leading/trailing widgets
-  static const double _horizontalTitleGap = 16.0;
+  static const double _horizontalTitleGap = 0.0;
 
   // The minimum padding on the top and bottom of the title and subtitle widgets.
   static const double _minVerticalPadding = 4.0;
@@ -1028,7 +1028,7 @@ class _RenderListTile extends RenderBox {
         }
       case TextDirection.ltr:
         {
-          if (hasLeading) _positionBox(leading, Offset(0.0, leadingY));
+          if (hasLeading) _positionBox(leading, Offset(0.0, titleY));
           _positionBox(title, Offset(titleStart, titleY));
           if (hasSubtitle)
             _positionBox(subtitle, Offset(titleStart, subtitleY));
