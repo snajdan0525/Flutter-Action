@@ -8,7 +8,7 @@ import 'package:flutter_action/demo/simple_data_view_demo.dart';
 import 'package:flutter_action/demo/bottom_sheet_demo.dart';
 import 'package:flutter_action/util/divider_line.dart';
 import 'package:flutter_action/demo/setting_item_view_widget_demo.dart';
-
+import 'package:flutter_action/demo/button_demo.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
     Key key,
@@ -114,6 +114,16 @@ class MyDrawer extends StatelessWidget {
                     onTap: () {
                       Navigator.push(context, new FadeRoute(builder: (context) {
                         return new SettingItemViewDemo();
+                      }));
+                    },
+                  ),
+                  DividerLineWidget(),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('ButtonDemo'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        return new ButtonDemo();
                       }));
                     },
                   ),
