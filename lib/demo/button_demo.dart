@@ -9,7 +9,7 @@ class ButtonDemo extends StatelessWidget {
         title: new Text('ButtonDemo'),
       ),
       body: new Center(
-        child: new GradientButton(),
+        child: new GradientButtonWidget(buttonText: '参与活动',),
       ),
     );
   }
