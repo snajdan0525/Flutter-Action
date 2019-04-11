@@ -28,6 +28,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_gallery_assets: 0.1.6
   lpinyin: ^1.0.7
+  fluttertoast: ^3.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
