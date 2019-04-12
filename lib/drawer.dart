@@ -9,6 +9,9 @@ import 'package:flutter_action/demo/bottom_sheet_demo.dart';
 import 'package:flutter_action/util/divider_line.dart';
 import 'package:flutter_action/demo/setting_item_view_widget_demo.dart';
 import 'package:flutter_action/demo/button_demo.dart';
+import 'demo/common_dialog_demo.dart';
+import 'package:flutter_action/demo/encap_bqimage_demo.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
     Key key,
@@ -124,6 +127,26 @@ class MyDrawer extends StatelessWidget {
                     onTap: () {
                       Navigator.push(context, new FadeRoute(builder: (context) {
                         return new ButtonDemo();
+                      }));
+                    },
+                  ),
+                  DividerLineWidget(),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('DialogDemo'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        //
+                      }));
+                    },
+                  ),
+                  DividerLineWidget(),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('EncapsilizeBqImageDemo'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        return new EncapsilizeBqImageDemo();
                       }));
                     },
                   ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/util/gradient_button.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:toast/toast.dart';
 
 class ButtonDemo extends StatelessWidget {
   @override
@@ -19,11 +21,12 @@ class ButtonDemo extends StatelessWidget {
               gravity: ToastGravity.CENTER,
               timeInSecForIos: 1,
             );
+//            Toast.show("Button Clicked", context,
+//                duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
           },
         ),
       ),
     );
   }
 
-  void _toast() {}
 }
