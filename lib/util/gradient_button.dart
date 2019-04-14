@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+typedef OnButtonClickCallBack = void Function();
+
 class GradientButtonWidget extends StatefulWidget {
-  final Function onTap;
+  final OnButtonClickCallBack onTap;
   final String buttonText;
 
   GradientButtonWidget({Key key, this.buttonText, this.onTap})
@@ -32,7 +34,9 @@ class GradientButtonWidgetState extends State<GradientButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-      onTap: widget.onTap,
+      onTap: () {
+        widget.onTap();
+      },
       onTapDown: (d) => setState(() => _isDown = true),
       onTapUp: (d) => setState(() => _isDown = false),
       onTapCancel: () => setState(() => _isDown = false),

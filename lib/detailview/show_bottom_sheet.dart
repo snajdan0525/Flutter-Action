@@ -46,7 +46,7 @@ class BottomViewState extends State<BottomViewWidget> {
       ),
       body: Center(
         child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               new RaisedButton(
                 onPressed: () => _modalBottomSheetMenu(context),
