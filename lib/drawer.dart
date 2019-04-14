@@ -136,7 +136,7 @@ class MyDrawer extends StatelessWidget {
                     title: const Text('DialogDemo'),
                     onTap: () {
                       Navigator.push(context, new FadeRoute(builder: (context) {
-                        //
+                        return new DialogDemo();
                       }));
                     },
                   ),

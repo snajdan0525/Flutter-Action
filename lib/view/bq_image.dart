@@ -5,35 +5,54 @@ import 'dart:async';
 typedef OnImageLoadedFinishedCallback = void Function(ui.Image value);
 typedef OnImageLoadedFailureCallback = void Function();
 
-class BqImage extends StatelessWidget {
+class BqImageWidget extends StatefulWidget {
   final Image image;
   final OnImageLoadedFailureCallback onImageLoadedFailureCallback;
   final OnImageLoadedFinishedCallback onImageLoadedFinishedCallback;
 
-  BqImage(
+  BqImageWidget(
       {Key key,
       @required this.image,
       this.onImageLoadedFinishedCallback,
       this.onImageLoadedFailureCallback});
 
   @override
+  BqImageWidgetState createState() => BqImageWidgetState();
+}
+
+class BqImageWidgetState extends State<BqImageWidget> {
+  Future<ui.Image> _future;
+  Completer<ui.Image> completer;
+  bool _hasEnter = false;
+
+  @override
+  void initState() {
+    completer = new Completer<ui.Image>();
+    _future = _getImage();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new FutureBuilder(
-      future: _getImage(),
+      future: _future,
       builder: (BuildContext context, AsyncSnapshot<ui.Image> snapshot) {
         if (snapshot.hasData) {
-          if (onImageLoadedFinishedCallback != null) {
-            this.onImageLoadedFinishedCallback(snapshot.data);
+          if (!_hasEnter) {
+            _hasEnter = true;
+            if (widget.onImageLoadedFinishedCallback != null) {
+              widget.onImageLoadedFinishedCallback(snapshot.data);
+            }
           }
-          return image;
+          return widget.image;
         }
         if (snapshot.connectionState != ConnectionState.done) {
           return _getProgress();
         }
         if (!snapshot.hasData &&
             snapshot.connectionState == ConnectionState.done) {
-          if (onImageLoadedFailureCallback != null) {
-            this.onImageLoadedFailureCallback();
+          if (widget.onImageLoadedFailureCallback != null) {
+            widget.onImageLoadedFailureCallback();
           }
           return Text('No Data');
         }
@@ -41,9 +60,8 @@ class BqImage extends StatelessWidget {
     );
   }
 
-  Future<ui.Image> _getImage() {
-    Completer<ui.Image> completer = new Completer<ui.Image>();
-    image.image.resolve(new ImageConfiguration()).addListener(
+  Future<ui.Image> _getImage() async {
+    widget.image.image.resolve(new ImageConfiguration()).addListener(
         (ImageInfo info, bool _) => completer.complete(info.image));
     return completer.future;
   }
@@ -54,5 +72,11 @@ class BqImage extends StatelessWidget {
         child: new CircularProgressIndicator(),
       ),
     );
+  }
+
+  @override
+  void didUpdateWidget(BqImageWidget oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
   }
 }
