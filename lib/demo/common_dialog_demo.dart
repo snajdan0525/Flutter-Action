@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_action/view/dialog/bq_loading_dialog.dart';
 
 class DialogDemo extends StatelessWidget {
   @override
@@ -19,9 +20,25 @@ class DialogDemo extends StatelessWidget {
                 onPressed: () => _showAlertDilog(context),
                 child: new Text('showAlertDilog'),
               ),
+              new RaisedButton(
+                onPressed: () => _showLoadingDilog(context),
+                child: new Text('showLoadingDilog'),
+              ),
             ]),
       ),
     );
+  }
+
+  void _showLoadingDilog(BuildContext context) {
+    showDialog<Null>(
+        context: context, //BuildContext对象
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new LoadingDialog(
+            //调用对话框
+            text: '正在获取详情...',
+          );
+        });
   }
 
   void _showAlertDilog(BuildContext context) {
