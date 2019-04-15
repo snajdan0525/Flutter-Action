@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'dart:async';
-
+import 'package:flutter_action/view/image/scalable_image.dart';
 typedef OnImageLoadedFinishedCallback = void Function(ui.Image value);
 typedef OnImageLoadedFailureCallback = void Function();
 
