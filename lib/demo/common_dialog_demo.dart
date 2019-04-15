@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/view/dialog/bq_loading_dialog.dart';
+import 'package:flutter_action/view/dialog/bq_alert_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_action/view/dialog/full_screen_dialog.dart';
 
 class DialogDemo extends StatelessWidget {
   @override
@@ -17,12 +20,20 @@ class DialogDemo extends StatelessWidget {
                 child: new Text('showPictureDialogView'),
               ),
               new RaisedButton(
-                onPressed: () => _showAlertDilog(context),
-                child: new Text('showAlertDilog'),
+                onPressed: () => _showAlertDialog(context),
+                child: new Text('showAlertDialog'),
+              ),
+              new RaisedButton(
+                onPressed: () => _showBQAlertDialog(context),
+                child: new Text('showBQAlertDialog'),
               ),
               new RaisedButton(
                 onPressed: () => _showLoadingDilog(context),
                 child: new Text('showLoadingDilog'),
+              ),
+              new RaisedButton(
+                onPressed: () => _showFullScreenDialog(context),
+                child: new Text('showFullScreenDialog'),
               ),
             ]),
       ),
@@ -41,7 +52,7 @@ class DialogDemo extends StatelessWidget {
         });
   }
 
-  void _showAlertDilog(BuildContext context) {
+  void _showAlertDialog(BuildContext context) {
     showDialog<void>(
       context: context,
       barrierDismissible: false, //user must tap button!
@@ -69,6 +80,32 @@ class DialogDemo extends StatelessWidget {
     );
   }
 
+  void _showBQAlertDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false, //user must tap button!
+      builder: (BuildContext context) {
+        return BqAlertDialog(
+          title: Text('提示'),
+          showRightButton: true,
+          showLeftButton: true,
+          content: Text('是否注销账号'),
+          onLeftButtonClickCallBack: () {
+            Navigator.of(context).pop();
+          },
+          onRightButtonClickCallBack: () {
+            Fluttertoast.showToast(
+              msg: "Right Clicked",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIos: 1,
+            );
+          },
+        );
+      },
+    );
+  }
+
   void _showPicDialogView(BuildContext context) {
     showDialog<void>(
       context: context,
@@ -81,6 +118,23 @@ class DialogDemo extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void _showFullScreenDialog(BuildContext context) {
+    var titleHeight = Scaffold.of(context)
+        .widget
+        .appBar
+        .preferredSize
+        .height; //ctx必须含有Scaffold的context
+
+    showDialog(
+      context: context,
+      builder: (context) => new FullScreenDialog(
+            top: titleHeight,
+            child: new Text('测试标题'),
+            right: 0.0,
+          ),
     );
   }
 }
