@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_action/view/dialog/bq_loading_dialog.dart';
 import 'package:flutter_action/view/dialog/bq_alert_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DialogDemo extends StatelessWidget {
   @override
@@ -84,6 +85,17 @@ class DialogDemo extends StatelessWidget {
           showRightButton: true,
           showLeftButton: true,
           content: Text('是否注销账号'),
+          onLeftButtonClickCallBack: () {
+            Navigator.of(context).pop();
+          },
+          onRightButtonClickCallBack: () {
+            Fluttertoast.showToast(
+              msg: "Right Clicked",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIos: 1,
+            );
+          },
         );
       },
     );

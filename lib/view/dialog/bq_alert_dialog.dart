@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_action/util/divider_line.dart';
 
+typedef OnLeftButtonClickCallBack = void Function();
+typedef OnRightButtonClickCallBack = void Function();
+
 class BqAlertDialog extends StatelessWidget {
+  final OnLeftButtonClickCallBack onLeftButtonClickCallBack;
+  final OnRightButtonClickCallBack onRightButtonClickCallBack;
+
   /// Creates an alert dialog.
   ///
   /// Typically used in conjunction with [showDialog].
@@ -29,6 +35,8 @@ class BqAlertDialog extends StatelessWidget {
     this.rightButtontText = '确认',
     this.showLeftButton = true,
     this.showRightButton = true,
+    this.onRightButtonClickCallBack,
+    this.onLeftButtonClickCallBack,
   })  : assert(contentPadding != null),
         super(key: key);
   final bool showRightButton;
@@ -150,38 +158,12 @@ class BqAlertDialog extends StatelessWidget {
           Flex(
             direction: Axis.horizontal,
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: new Container(
-                  height: 48,
-                  child: new Center(
-                    child: Text(
-                      leftButtonText,
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(color: Color(0xFF666666), fontSize: 15.0),
-                    ),
-                  ),
-                ),
-              ),
+              _getLeftButton(),
               Expanded(
                 flex: 0,
                 child: DividerLineWidget(width: 0.4, height: 48.0),
               ),
-              Expanded(
-                flex: 1,
-                child: new Container(
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      rightButtontText,
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(color: Color(0xFFFF4436), fontSize: 15.0),
-                    ),
-                  ),
-                ),
-              ),
+              _getRightButton(),
             ],
           ),
         ],
@@ -194,20 +176,7 @@ class BqAlertDialog extends StatelessWidget {
           Flex(
             direction: Axis.horizontal,
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: new Container(
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      leftButtonText,
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(color: Color(0xFF666666), fontSize: 15.0),
-                    ),
-                  ),
-                ),
-              ),
+              _getLeftButton(),
             ],
           ),
         ],
@@ -221,20 +190,7 @@ class BqAlertDialog extends StatelessWidget {
           Flex(
             direction: Axis.horizontal,
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: new Container(
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      rightButtontText,
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(color: Color(0xFFFF4436), fontSize: 15.0),
-                    ),
-                  ),
-                ),
-              ),
+              _getRightButton(),
             ],
           ),
         ],
@@ -258,5 +214,46 @@ class BqAlertDialog extends StatelessWidget {
       shape: shape,
       child: dialogChild,
     );
+  }
+
+  Expanded _getLeftButton() {
+    return Expanded(
+        flex: 1,
+        child: new GestureDetector(
+          onTap: () {
+            if (onLeftButtonClickCallBack != null) onLeftButtonClickCallBack();
+          },
+          child: Container(
+            height: 48,
+            child: new Center(
+              child: Text(
+                leftButtonText,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Color(0xFF666666), fontSize: 15.0),
+              ),
+            ),
+          ),
+        ));
+  }
+
+  Expanded _getRightButton() {
+    return Expanded(
+        flex: 1,
+        child: new GestureDetector(
+          onTap: () {
+            if (onRightButtonClickCallBack != null)
+              onRightButtonClickCallBack();
+          },
+          child: new Container(
+            height: 48,
+            child: Center(
+              child: Text(
+                rightButtontText,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Color(0xFFFF4436), fontSize: 15.0),
+              ),
+            ),
+          ),
+        ));
   }
 }
