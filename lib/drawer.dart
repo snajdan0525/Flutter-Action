@@ -151,6 +151,26 @@ class MyDrawer extends StatelessWidget {
                     },
                   ),
                   DividerLineWidget(),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('FlutterPopupWindow'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        return new EncapsilizeBqImageDemo();
+                      }));
+                    },
+                  ),
+                  DividerLineWidget(),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('吸顶头部刷新ListView'),
+                    onTap: () {
+                      Navigator.push(context, new FadeRoute(builder: (context) {
+                        return new EncapsilizeBqImageDemo();
+                      }));
+                    },
+                  ),
+                  DividerLineWidget(),
                 ],
               ),
             ),

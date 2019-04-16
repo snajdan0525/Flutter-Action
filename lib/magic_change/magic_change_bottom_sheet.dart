@@ -133,7 +133,7 @@ class _BottomSheetState extends State<BottomSheet> {
 // MODAL BOTTOM SHEETS
 
 class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
-  _ModalBottomSheetLayout(this.progress);
+  _ModalBottomSheetLayout(this.progress) {print(this.progress);}
 
   final double progress;
 
@@ -149,6 +149,8 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {
+    print('size.height: ${size.height} |   childSize.height: ${childSize.height}');
+    print(Offset(0.0, size.height - childSize.height * progress));
     return Offset(0.0, size.height - childSize.height * progress);
   }
 
