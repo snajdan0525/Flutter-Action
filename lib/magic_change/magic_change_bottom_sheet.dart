@@ -137,6 +137,11 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
 
   final double progress;
 
+//  @override
+//  Size getSize(BoxConstraints constraints) {
+//    print('getSize ${super.getSize(constraints)}');//这个SIZE 并不是子布局的SIZE
+//    return super.getSize(constraints);
+//  }
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     return BoxConstraints(

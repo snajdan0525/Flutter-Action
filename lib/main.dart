@@ -20,7 +20,7 @@ class MyHome extends StatefulWidget {
 
 // SingleTickerProviderStateMixin is used for animation
 class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
-  // Create a tab controller
+  // Create a tab controller 
   TabController controller;
   int _selectedIndex = 1;
 

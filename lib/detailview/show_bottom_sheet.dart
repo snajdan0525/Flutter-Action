@@ -125,7 +125,7 @@ class BottomViewState extends State<BottomViewWidget> {
                   ),
                 ),
                 new DividerLineWidget(),
-                new Expanded(
+                new Expanded(//这段代码严重影响了动画渲染速度
                     child: ListView.builder(
                   itemCount: _items.length,
                   itemExtent: 50.0,
